@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download Your Birthday App</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: pink;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .bears {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(clamp(64px, 18vw, 92px), 1fr));
+      gap: clamp(6px, 1.6vw, 10px);
+      padding: clamp(6px, 1.6vw, 10px);
+      box-sizing: border-box;
+    }
+
+    .bears img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .cta-wrap {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .download-btn {
+      pointer-events: auto;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(110deg, #d81b60 0%, #ff4aa2 20%, #ffd0e6 50%, #ff4aa2 80%, #d81b60 100%);
+      background-size: 220% 100%;
+      animation: ledScan 2.2s linear infinite;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: clamp(15px, 4.2vw, 18px);
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      box-shadow:
+        0 0 10px rgba(255, 64, 160, 0.7),
+        0 0 24px rgba(255, 64, 160, 0.55),
+        0 10px 20px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(2px);
+      text-align: center;
+      margin: 16px;
+      max-width: calc(100vw - 32px);
+    }
+
+    @keyframes ledScan {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bears">
+  </div>
+  <div class="cta-wrap">
+    <a class="download-btn" href="halimabdapp.zip" download>download your birthday app</a>
+  </div>
+  <script>
+    const bears = document.querySelector(".bears");
+
+    function fillBears() {
+      const size = Math.max(64, Math.min(92, window.innerWidth * 0.18));
+      const columns = Math.ceil(window.innerWidth / size) + 2;
+      const rows = Math.ceil(window.innerHeight / size) + 2;
+      const total = columns * rows;
+
+      bears.innerHTML = "";
+      for (let i = 0; i < total; i++) {
+        const img = document.createElement("img");
+        img.src = "app/src/main/res/drawable/ic_bear.png";
+        img.alt = "bear";
+        bears.appendChild(img);
+      }
+    }
+
+    fillBears();
+    window.addEventListener("resize", fillBears);
+  </script>
+</body>
+</html>
